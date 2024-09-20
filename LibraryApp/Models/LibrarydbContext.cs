@@ -24,7 +24,7 @@ public partial class LibrarydbContext : DbContext
     {
         modelBuilder.Entity<Author>(entity =>
         {
-            entity.HasKey(e => e.AuthorId).HasName("PK__Authors__70DAFC34B9C4834D");
+            entity.HasKey(e => e.Id).HasName("PK__Authors__70DAFC34B9C4834D");
 
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
@@ -32,7 +32,7 @@ public partial class LibrarydbContext : DbContext
 
         modelBuilder.Entity<Book>(entity =>
         {
-            entity.HasKey(e => e.BookId).HasName("PK__Books__3DE0C20779BFB3BE");
+            entity.HasKey(e => e.Id).HasName("PK__Books__3DE0C20779BFB3BE");
 
             entity.Property(e => e.Title).HasMaxLength(100);
 
