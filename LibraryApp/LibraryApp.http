@@ -1,0 +1,24 @@
+@LibraryApp_HostAddress = http://localhost:5140
+
+POST {{LibraryApp_HostAddress}}/api/library
+Content-Type: application/json
+
+{
+  //Book
+}
+
+###
+
+GET {{LibraryApp_HostAddress}}/api/author/1
+###
+
+POST {{LibraryApp_HostAddress}}/api/author
+Content-Type: application/json
+
+{
+    "firstName": "Levy",
+    "lastName":"Ukeishaka"
+    
+}
+
+###
