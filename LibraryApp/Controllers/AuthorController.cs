@@ -1,4 +1,5 @@
-﻿using LibraryApp.Models;
+﻿using LibraryApp.DTO;
+using LibraryApp.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +18,24 @@ namespace LibraryApp.Controllers
 
         // GET all authors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
+        public async Task<ActionResult<IEnumerable<AuthorDto>>> GetAuthors()
         {
-            var authors = await _context.Authors.ToListAsync();
+            var authors = await _context.Authors
+                .Include(a => a.Books)
+                .Select(a => new AuthorDto
+                {
+                    Id = a.Id,
+                    Name = a.FirstName,
+                    Books = a.Books.Select(b => new BookDto
+                    {
+                        Title = b.Title
+                    }).ToList()
+                })
+                .ToListAsync();
+
             return Ok(authors);
         }
+
 
         // GET unique author
         [HttpGet("{id}")]
